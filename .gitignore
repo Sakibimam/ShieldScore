@@ -47,6 +47,9 @@ ai/Agent_memory.md
 ai/AGENT_MEMORY.md
 ai/MIDNIGHT_DOCS_FULL.md
 
+# Compiled Compact contract output (build artifact)
+contracts/managed/
+
 # IDE / tooling
 .cursor/
 

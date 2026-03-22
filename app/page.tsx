@@ -1,4 +1,13 @@
+"use client";
+
+import { useState } from "react";
+import type { ConnectedAPI } from "@midnight-ntwrk/dapp-connector-api";
+import WalletConnect from "@/components/WalletConnect";
+import ProofForm from "@/components/ProofForm";
+
 export default function Home() {
+  const [walletApi, setWalletApi] = useState<ConnectedAPI | null>(null);
+
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-zinc-950">
       <main className="flex flex-col items-center gap-8 py-32 px-6">
@@ -10,8 +19,13 @@ export default function Home() {
           Your financial data never leaves your device.
         </p>
         <div className="mt-4">
-          {/* Wallet connect button will go here */}
+          <WalletConnect onConnect={(_addr, api) => setWalletApi(api)} />
         </div>
+        {walletApi && (
+          <div className="mt-6">
+            <ProofForm walletApi={walletApi} />
+          </div>
+        )}
       </main>
     </div>
   );

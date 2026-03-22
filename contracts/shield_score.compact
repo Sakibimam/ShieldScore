@@ -1,0 +1,60 @@
+pragma language_version >= 0.22;
+
+import CompactStandardLibrary;
+
+// --- Types ---
+
+struct Profile {
+  income: Uint<64>;
+  debt: Uint<64>;
+  defiAssets: Uint<64>;
+}
+
+enum Tier {
+  NONE,
+  SOLVENT,
+  EXCELLENT
+}
+
+// --- Private state (witness) ---
+// These are supplied by the DApp at call time; never stored on-chain.
+
+witness getProfile(): Profile;
+
+// --- Public state (ledger) ---
+// Only verification results are stored — no financial data.
+
+export ledger lastTier: Tier;
+export ledger verifyCount: Counter;
+
+// --- Constructor ---
+
+constructor() {
+  lastTier = Tier.NONE;
+}
+
+// --- Pure helpers ---
+
+export pure circuit isSolvent(profile: Profile): Boolean {
+  return (profile.income + profile.defiAssets) > profile.debt;
+}
+
+export pure circuit isExcellentTier(profile: Profile): Boolean {
+  return (profile.income + profile.defiAssets) >= 3 * profile.debt;
+}
+
+// --- Exported circuits (on-chain verification) ---
+
+export circuit proveSolvency(): [] {
+  const profile = getProfile();
+  assert(isSolvent(profile), "not solvent");
+  lastTier = disclose(Tier.SOLVENT);
+  verifyCount += 1;
+}
+
+export circuit proveExcellentTier(): [] {
+  const profile = getProfile();
+  assert(isExcellentTier(profile), "not excellent tier");
+  lastTier = disclose(Tier.EXCELLENT);
+  verifyCount += 1;
+}
