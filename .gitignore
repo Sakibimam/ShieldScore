@@ -39,3 +39,19 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local AI / agent context (private — not published)
+ai/defects.md
+ai/state.md
+ai/Agent_memory.md
+ai/AGENT_MEMORY.md
+ai/MIDNIGHT_DOCS_FULL.md
+
+# IDE / tooling
+.cursor/
+
+# OS / editor junk
+Thumbs.db
+*.swp
+*.swo
+.idea/
