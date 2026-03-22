@@ -1,4 +1,10 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ShieldScore
+
+Privacy-preserving credit & solvency verification on [Midnight](https://midnight.network), built with [Next.js](https://nextjs.org).
+
+---
+
+This repo was bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
 
