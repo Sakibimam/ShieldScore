@@ -22,7 +22,7 @@ export default function WalletConnect({
       const wallets: InitialAPI[] = Object.values(window.midnight ?? {});
 
       if (wallets.length === 0) {
-        setError("No Midnight wallet found. Install Lace wallet extension.");
+        setError("No Midnight wallet found. Install Lace.");
         return;
       }
 
@@ -41,9 +41,9 @@ export default function WalletConnect({
 
   if (address) {
     return (
-      <div className="flex flex-col items-center gap-3">
-        <span className="text-sm text-emerald-400">Connected</span>
-        <code className="rounded-lg bg-zinc-800 px-4 py-2 text-xs text-zinc-300 max-w-xs truncate">
+      <div className="flex w-full items-center gap-3">
+        <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-400" />
+        <code className="min-w-0 flex-1 truncate font-mono text-xs text-white/60">
           {address}
         </code>
       </div>
@@ -51,15 +51,18 @@ export default function WalletConnect({
   }
 
   return (
-    <div className="flex flex-col items-center gap-3">
+    <div className="flex w-full flex-col gap-3">
       <button
         onClick={connect}
         disabled={connecting}
-        className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-zinc-950 transition-colors hover:bg-zinc-200 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="flex w-full items-center justify-between border border-white/25 px-4 py-3 text-left font-mono text-[11px] uppercase tracking-[0.2em] text-white transition hover:bg-white hover:text-black disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-white"
       >
-        {connecting ? "Connecting…" : "Connect Wallet"}
+        <span>{connecting ? "Connecting…" : "Link Wallet"}</span>
+        <span aria-hidden="true">→</span>
       </button>
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && (
+        <p className="font-mono text-[10px] text-red-400/80">{error}</p>
+      )}
     </div>
   );
 }

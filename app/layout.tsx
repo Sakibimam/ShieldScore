@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "ShieldScore",
   description: "Zero-knowledge credit & solvency verification on Midnight",
+  icons: { icon: "/icon.svg" },
 };
 
 export default function RootLayout({
