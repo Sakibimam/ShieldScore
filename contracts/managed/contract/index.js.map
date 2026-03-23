@@ -1,0 +1,8 @@
+{
+  "version": 3,
+  "file": "index.js",
+  "sourceRoot": "../../../",
+  "sources": ["contracts/shield_score.compact"],
+  "names": [],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EA+BA;;;;;;;;;;;;;MAMA,AAAA,SAEC;;OAAA;MAED,AAAA,eAEC;;OAAA;MAID,AAAA,aAKC;;;;;;;;;;;;;;;;;;;;;;OAAA;MAED,AAAA,kBAKC;;;;;;;;;;;;;;;;;;;;;;OAAA;;;;;;;;;;GA1BA;EAFD;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;IALA;;;;;;;;;yEAA6B;IAC7B;;;;;;;;;yEAAmC;IAKjC;;;;;;;;;yEAAQ;;;;;;;GACT;EAZD,AAAA,aAA8B;;0DAA9B,UAA8B;;;;;;;;;;;;;;GAAA;EAgB9B,AAAA,YAEC,CAF6B,SAAgB;UACrC,GAAoD,GAAnD,SAAO,UAAU,SAAO;WAAzB,GAAoD,GAAZ,SAAO;GACvD;EAED,AAAA,kBAEC,CAFmC,SAAgB;UAC3C,GAAyD,GAAxD,SAAO,UAAU,SAAO;WAAzB,GAAyD,SAAZ,SAAO;GAC5D;EAID,AAAA,gBAKC;UAJO,SAAsB;8CACX,SAAO;IACxB;;;;;;;;;yEAAQ;UACR,KAAW;IAAX;;;;;;;;;;6FAAA,KAAW;;;;wEAAA;;GACZ;EAED,AAAA,qBAKC;UAJO,SAAsB;oDACL,SAAO;;IAC9B;;;;;;;;;yEAAQ;UACR,KAAW;IAAX;;;;;;;;;;6FAAA,KAAW;;;;wEAAA;;GACZ;;;;;;;;;;;;;;;;IAjCD;qCAAA;;;;;;;;;;;0GAA6B;KAAA;IAC7B;qCAAA;;;;;;;;;;;0GAAmC;KAAA;;;;;;;;EAUnC,AAAA,SAEC;;;;UAF6B,SAAgB;;;;;;;;uCAAhB,SAAgB;GAE7C;EAED,AAAA,eAEC;;;;UAFmC,SAAgB;;;;;;;;6CAAhB,SAAgB;GAEnD;;;;"
+}

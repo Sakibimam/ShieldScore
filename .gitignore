@@ -47,8 +47,8 @@ ai/Agent_memory.md
 ai/AGENT_MEMORY.md
 ai/MIDNIGHT_DOCS_FULL.md
 
-# Compiled Compact contract output (build artifact)
-contracts/managed/
+# Compiled Compact contract output — committed so Vercel can build without the compiler
+# contracts/managed/
 
 # IDE / tooling
 .cursor/
