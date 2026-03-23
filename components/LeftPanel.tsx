@@ -1,9 +1,8 @@
 "use client";
 
-import type { ConnectedAPI } from "@midnight-ntwrk/dapp-connector-api";
+import type { WalletState } from "@/hooks";
 import type { FormData, ProofPhase, ProofResult } from "@/lib/types";
 import ProofForm from "@/components/ProofForm";
-import WalletConnect from "@/components/WalletConnect";
 
 const TIER_COLOR: Record<string, string> = {
   excellent: "text-emerald-400",
@@ -12,18 +11,18 @@ const TIER_COLOR: Record<string, string> = {
 };
 
 export default function LeftPanel({
-  walletApi,
+  wallet,
   phase,
   proof,
-  onConnect,
   onSubmit,
 }: {
-  walletApi: ConnectedAPI | null;
+  wallet: WalletState;
   phase: ProofPhase;
   proof: ProofResult | null;
-  onConnect: (api: ConnectedAPI) => void;
   onSubmit: (data: FormData) => void;
 }) {
+  const connected = !!wallet.api;
+
   return (
     <section className="flex min-h-0 flex-col border-b border-white/70 p-6 lg:row-span-2 lg:border-r lg:overflow-y-auto">
       <SectionLabel text="Entity.Target" />
@@ -36,20 +35,40 @@ export default function LeftPanel({
         Financial data never leaves this device.
       </p>
 
+      {/* Wallet card — driven entirely by the hook state */}
       <div className="mt-6 border border-white/10 bg-white/[0.02] p-4">
         <div className="mb-3 flex items-center gap-2">
-          <span
-            className={`h-2 w-2 rounded-full ${walletApi ? "bg-emerald-400" : "bg-white/25"}`}
-          />
+          <span className={`h-2 w-2 rounded-full ${connected ? "bg-emerald-400" : "bg-white/25"}`} />
           <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/50">
-            {walletApi ? "Wallet Linked" : "No Wallet"}
+            {connected ? "Wallet Linked" : wallet.walletAvailable ? "Wallet Detected" : "No Wallet"}
           </span>
         </div>
-        <WalletConnect onConnect={(_addr, api) => onConnect(api)} />
+
+        {connected ? (
+          <div className="flex w-full items-center gap-3">
+            <code className="min-w-0 flex-1 truncate font-mono text-xs text-white/60">
+              {wallet.address}
+            </code>
+          </div>
+        ) : (
+          <button
+            onClick={wallet.connect}
+            disabled={wallet.connecting}
+            className="flex w-full items-center justify-between border border-white/25 px-4 py-3 text-left font-mono text-[11px] uppercase tracking-[0.2em] text-white transition hover:bg-white hover:text-black disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-white"
+          >
+            <span>{wallet.connecting ? "Connecting…" : "Link Wallet"}</span>
+            <span aria-hidden="true">→</span>
+          </button>
+        )}
+
+        {wallet.error && (
+          <p className="mt-2 font-mono text-[10px] text-red-400/80">{wallet.error}</p>
+        )}
       </div>
 
+      {/* Proof form or placeholder */}
       <div className="mt-6 flex-1">
-        {walletApi ? (
+        {connected ? (
           <>
             <SectionLabel text="Proof.Input" />
             <div className="mt-3">
@@ -63,6 +82,7 @@ export default function LeftPanel({
         )}
       </div>
 
+      {/* Result card */}
       {proof && (phase === "success" || phase === "fail") && (
         <div className="mt-6">
           <SectionLabel text="Result" />

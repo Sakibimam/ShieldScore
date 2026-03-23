@@ -1,8 +1,4 @@
-export type LogEntry = {
-  time: string;
-  label: string;
-  status: "ok" | "fail" | "...";
-};
+import type { LogEntry } from "@/hooks";
 
 export default function LogsPanel({ logs }: { logs: LogEntry[] }) {
   return (
@@ -26,11 +22,7 @@ export default function LogsPanel({ logs }: { logs: LogEntry[] }) {
               >
                 <span className="text-white/30">{log.time}</span>
                 <span className="truncate">{log.label}</span>
-                <span
-                  className={
-                    log.status === "fail" ? "text-red-400/70" : ""
-                  }
-                >
+                <span className={log.status === "fail" ? "text-red-400/70" : ""}>
                   [{log.status}]
                 </span>
               </div>
