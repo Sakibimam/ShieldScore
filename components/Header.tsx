@@ -1,31 +1,43 @@
 import type { ProofPhase } from "@/lib/types";
 
 const PHASE_TAG: Record<ProofPhase, { label: string; color: string }> = {
-  idle: { label: "proof.idle", color: "text-white/50" },
-  generating: { label: "proof.generating", color: "text-yellow-400/70 animate-pulse" },
-  verifying: { label: "proof.verifying", color: "text-yellow-400/70 animate-pulse" },
-  success: { label: "proof.verified", color: "text-emerald-400/70" },
-  fail: { label: "proof.failed", color: "text-red-400/70" },
+  idle: { label: "proof.idle", color: "text-white/40" },
+  generating: { label: "proof.generating", color: "text-yellow-400/80 animate-pulse" },
+  verifying: { label: "proof.verifying", color: "text-yellow-400/80 animate-pulse" },
+  success: { label: "proof.verified", color: "text-emerald-400/80" },
+  fail: { label: "proof.failed", color: "text-red-400/80" },
 };
 
 export default function Header({
   connected,
   phase,
+  address,
 }: {
   connected: boolean;
   phase: ProofPhase;
+  address: string | null;
 }) {
   const tag = PHASE_TAG[phase];
 
   return (
-    <header className="flex flex-wrap items-center justify-between gap-2 border-b border-white/70 px-5 py-3.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/50 md:px-6">
+    <header className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-b border-white/70 px-5 py-3.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/50 md:px-6">
       <span className="flex items-center gap-2">
         <ShieldIcon />
-        shieldscore.system
+        shieldscore
       </span>
+
       <span className={tag.color}>{tag.label}</span>
-      <span className={connected ? "text-emerald-400/70" : ""}>
-        {connected ? "connection.active" : "connection.idle"}
+
+      <span className="flex items-center gap-2">
+        {connected && address && (
+          <span className="hidden text-white/30 sm:inline">
+            {address.slice(0, 12)}…
+          </span>
+        )}
+        <span className={`flex items-center gap-1.5 ${connected ? "text-emerald-400/70" : ""}`}>
+          <span className={`inline-block h-1.5 w-1.5 rounded-full ${connected ? "bg-emerald-400" : "bg-white/30"}`} />
+          {connected ? "preprod" : "offline"}
+        </span>
       </span>
     </header>
   );

@@ -44,7 +44,7 @@ export default function Home() {
   );
 
   return (
-    <SystemFrame header={<Header connected={!!wallet.api} phase={proof.phase} />}>
+    <SystemFrame header={<Header connected={!!wallet.api} phase={proof.phase} address={wallet.address} />}>
       <LeftPanel
         wallet={wallet}
         phase={proof.phase}
